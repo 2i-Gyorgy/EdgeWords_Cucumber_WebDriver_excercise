@@ -36,7 +36,7 @@ public class Hooks {
 
         // 8. / 11. Finally - Log Out
         driver.get(baseURL + "my-account/");
-        myAccountPOM myAccount = new myAccountPOM(driver);
+        MyAccountPOM myAccount = new MyAccountPOM(driver);
         myAccount.doLogOut();
         System.out.println("Logged out");
 

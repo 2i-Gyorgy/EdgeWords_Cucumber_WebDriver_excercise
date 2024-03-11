@@ -1,7 +1,7 @@
 package com.twoitesting.finalProjectCucumberWebDriver;
 
 import com.twoitesting.finalProjectCucumberWebDriver.pompages.NavbarPOM;
-import com.twoitesting.finalProjectCucumberWebDriver.pompages.myAccountPOM;
+import com.twoitesting.finalProjectCucumberWebDriver.pompages.MyAccountPOM;
 import io.cucumber.java.en.Given;
 import org.openqa.selenium.WebDriver;
 public class Background {
@@ -12,11 +12,11 @@ public class Background {
         this.driver = Hooks.driver;
     }
 
-    @Given("I'm logged in with my username {string} and password {string} on the My Account page.")
+    @Given("I'm logged in with my username {string} and password {string}.")
     public void login(String userName, String passwd) throws InterruptedException {
 
         NavbarPOM navBar = new NavbarPOM(driver);
-        myAccountPOM myAccount = new myAccountPOM(driver);
+        MyAccountPOM myAccount = new MyAccountPOM(driver);
 
         driver.get(baseURL + "my-account/");
 

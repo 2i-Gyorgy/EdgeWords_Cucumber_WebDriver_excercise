@@ -18,8 +18,8 @@ public class eCommerceTest {
         this.driver = Hooks.driver;
     }
 
-    @Given("I add Sunglasses to My Cart.")
-    public void addItemToCart() throws InterruptedException {
+    @Given("I add Sunglasses to the cart.")
+    public void add_item_to_the_cart() throws InterruptedException {
 
         NavbarPOM navBar = new NavbarPOM(driver);
         ShopPOM shop = new ShopPOM(driver);
@@ -47,31 +47,45 @@ public class eCommerceTest {
         assertThat("Not applied Coupon Code", cart.retrieveAddCouponResponse(), containsStringIgnoringCase("applied"));
         System.out.println("Coupon code applied");
     }
-
-    @Then("The applied discount is 15%, and the Total is correct after discount and shipping.")
-    public void the_applied_discount_is_x() {
+    @Then("The applied discount is {int}%.")
+    public void the_applied_discount_is_x(int expectedPerCent) {
 
         CartPOM cart = new CartPOM(driver);
 
         // 6. Check that the coupon takes off 15%
-        // & 7. Check that the total calculated after coupon & shipping is correct
         String priceString = cart.subTotalString();
         System.out.println("Subtotal amount is: " + priceString);
         String discountString = cart.discountString();
         System.out.println("Discount amount is: " + discountString);
+//        make some String to BigDecimal conversions
+        BigDecimal priceBigDecimal = priceStringToBigDecimal(priceString);
+        BigDecimal discountBigDecimal = priceStringToBigDecimal(discountString);
+//        assertThat("discount price value is incorrect", priceBigDecimal.multiply(BigDecimal.valueOf(0.15)), is(equalTo(discountBigDecimal))); // this came back with x.x00 != x.x
+        assertThat("Expected discount does not match actual discount", priceBigDecimal.multiply(BigDecimal.valueOf(.15)), Matchers.comparesEqualTo(discountBigDecimal)); // page shows correct discount
+        System.out.println("Good news everyone! The subtotal and discount amount is correct!");
+
+        System.out.println("TestCaseOneTest end");
+
+    }
+
+    @And("The Total is correct after discount and shipping.")
+    public void the_total_is_correct_after_discount_and_shipping() {
+
+        CartPOM cart = new CartPOM(driver);
+
+        // 7. Check that the total calculated after coupon & shipping is correct
+        String priceString = cart.subTotalString();
+        System.out.println("Subtotal amount is: " + priceString);
         String shippingString = cart.shippingFeeString();
         System.out.println("Shipping fee amount is: " + shippingString);
         String totalString = cart.totalAmountString();
         System.out.println("Total amount is: " + totalString);
 //        make some String to BigDecimal conversions
         BigDecimal priceBigDecimal = priceStringToBigDecimal(priceString);
-        BigDecimal discountBigDecimal = priceStringToBigDecimal(discountString);
         BigDecimal shippingBigDecimal = priceStringToBigDecimal(shippingString);
         BigDecimal totalBigDecimal = priceStringToBigDecimal(totalString);
-//        assertThat("discount price value is incorrect", priceBigDecimal.multiply(BigDecimal.valueOf(0.15)), is(equalTo(discountBigDecimal))); // this came back with x.x00 != x.x
-        assertThat("Expected discount does not match actual discount", priceBigDecimal.multiply(BigDecimal.valueOf(.15)), Matchers.comparesEqualTo(discountBigDecimal)); // page shows correct discount
         assertThat("Expected total does not match actual total", priceBigDecimal.multiply(BigDecimal.valueOf(.85)).add(shippingBigDecimal), Matchers.comparesEqualTo(totalBigDecimal)); // page calculates correct total with correct discount applied
-        System.out.println("Good new everyone! The applied discount amount is correct!");
+        System.out.println("Good news everyone! The applied discount amount is correct!");
 
         System.out.println("TestCaseOneTest end");
     }
