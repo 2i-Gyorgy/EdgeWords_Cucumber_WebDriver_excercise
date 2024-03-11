@@ -29,6 +29,7 @@ public class NavbarPOM {
     WebElement cartButton;
     @FindBy(linkText = "Orders")
     WebElement ordersLink;
+    @FindBy(linkText = "My account") WebElement myAccountLink;
 
     // Methods
     public void dismissBanner() {
@@ -45,6 +46,10 @@ public class NavbarPOM {
 
     public void navigateToOrders() {
         ordersLink.click();
+    }
+
+    public void navigateToMyAccount()  {
+        myAccountLink.click();
     }
 }
 

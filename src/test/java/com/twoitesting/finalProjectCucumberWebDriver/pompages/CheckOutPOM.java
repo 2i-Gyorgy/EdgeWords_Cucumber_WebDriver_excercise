@@ -37,7 +37,6 @@ public class CheckOutPOM {
     WebElement placeOrderButton;
     @FindBy(css = "li.woocommerce-order-overview__order.order")
     WebElement orderNumberWithText;
-    @FindBy(linkText = "My account") WebElement myAccountLink;
 
     // Methods
     public void fillOutShippingAddress() {
@@ -73,9 +72,5 @@ public class CheckOutPOM {
     public String retrieveOrderNumber() {
         waitForElementToBePresentPOM(driver, orderNumberWithText, 2);
         return orderNumberWithText.getText().substring(14, 18);
-    }
-
-    public void navigateToMyAccount()  {
-        myAccountLink.click();
     }
 }

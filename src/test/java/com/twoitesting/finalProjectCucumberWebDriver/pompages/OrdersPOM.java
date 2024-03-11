@@ -17,8 +17,6 @@ public class OrdersPOM {
         PageFactory.initElements(driver, this);
     }
     // locators
-//    WebElement cartButtonWait = waitForElementToBeClickable(driver, By.cssSelector("#site-header-cart > li > a"), 1);
-//        cartButtonWait.click();
     @FindBy (css = "tbody > tr:nth-child(1) > td:nth-child(1) > a") WebElement orderNumber;
     // Methods
      public String findOrderNumber() {

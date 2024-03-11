@@ -11,15 +11,15 @@ import static com.twoitesting.finalProjectCucumberWebDriver.utilitiesPOM.Helpers
 import static org.hamcrest.CoreMatchers.containsStringIgnoringCase;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class eCommerceTest {
+public class ECommerceTest {
     private static WebDriver driver;
 
-    public eCommerceTest() {
+    public ECommerceTest() {
         this.driver = Hooks.driver;
     }
 
-    @Given("I add Sunglasses to the cart.")
-    public void add_item_to_the_cart() throws InterruptedException {
+    @Given("I add item {string} to the cart.")
+    public void add_item_to_the_cart(String item) throws InterruptedException {
 
         NavbarPOM navBar = new NavbarPOM(driver);
         ShopPOM shop = new ShopPOM(driver);
@@ -29,8 +29,8 @@ public class eCommerceTest {
         System.out.println("Navigated to Shop");
 
         // 3. Add a clothing item to your Cart
-        shop.addProductToCart();
-        System.out.println("Beanie added to cart");
+        shop.addProductToCart(item);
+        System.out.println("Item added to cart");
 
         // 4. View the Cart
         navBar.goToCart();
@@ -90,8 +90,8 @@ public class eCommerceTest {
         System.out.println("TestCaseOneTest end");
     }
 
-    @When("Purchase item completing Billing Details in Checkout.")
-    public void purchase_item_completing_billing_details_in_checkout() {
+    @When("Purchase item completing Billing Details in Checkout with")
+    public void purchase_item_completing_billing_details_in_checkout(io.cucumber.datatable.DataTable dataTable) {
 
         CartPOM cart = new CartPOM(driver);
         CheckOutPOM checkout = new CheckOutPOM(driver);
@@ -118,7 +118,6 @@ public class eCommerceTest {
 
         CheckOutPOM checkout = new CheckOutPOM(driver);
         NavbarPOM navBar = new NavbarPOM(driver);
-        OrdersPOM orders = new OrdersPOM(driver);
 
         // 9. Capture the Order Number and write it to the results
         String orderNumber = checkout.retrieveOrderNumber();
@@ -126,11 +125,13 @@ public class eCommerceTest {
         System.out.println(orderNumber);
 
         // 10. Navigate to My Account->Orders and check the same order shows in the account
-        checkout.navigateToMyAccount();
+        navBar.navigateToMyAccount();
         System.out.println("Go to My Account");
 
         navBar.navigateToOrders();
         System.out.println("Go to Orders page");
+
+        OrdersPOM orders = new OrdersPOM(driver);
 
         assertThat("orders don't contain my order number", orders.findOrderNumber(), Matchers.containsString(orderNumber));
         System.out.println("The two captured order numbers match! happy days");
