@@ -5,13 +5,13 @@ Feature: Edgewords eCommerce demo-site
 
   Scenario Outline: Coupon code gives appropriate discount
     Given I add item "<item>" to the cart.
-    When I add a coupon code "edgewords".
-    Then The applied discount is 15%.
+    When I add a coupon code "<couponCode>".
+    Then The applied discount is <discount>%.
     And The Total is correct after discount and shipping.
     Examples:
-    | item       |
-    | Sunglasses |
-    | Cap        |
+    | item       | couponCode | discount |
+    | Sunglasses | edgewords  | 15       |
+    | Cap        | edgewords  | 15       |
 
   Scenario Outline: Completed order added to order history
     Given I add item "<item>" to the cart.

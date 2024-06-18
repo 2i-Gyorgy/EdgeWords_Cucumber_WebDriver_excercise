@@ -35,8 +35,6 @@ public class CheckOutPOM {
     WebElement paymentMethodChequeRadioButton;
     @FindBy(id = "place_order")
     WebElement placeOrderButton;
-    @FindBy(css = "li.woocommerce-order-overview__order.order")
-    WebElement orderNumberWithText;
 
     // Methods
     public void fillOutShippingAddress() {
@@ -69,8 +67,4 @@ public class CheckOutPOM {
         placeOrderButton.click();
     }
 
-    public String retrieveOrderNumber() {
-        waitForElementToBePresentPOM(driver, orderNumberWithText, 2);
-        return orderNumberWithText.getText().substring(14, 18);
-    }
 }

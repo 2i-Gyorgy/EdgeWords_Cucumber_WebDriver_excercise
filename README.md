@@ -19,14 +19,14 @@ Sorry this has taken some time to do… <br>
    #public void the_applied_discount_is_x(int expectedPerCent) {
    And the Total is correct after discount and shipping.
    ```
-- [ ] It would also be a good idea to pass Scenario 2’s customer billing details through as e.g. a data table.
+- [x] It would also be a good idea to pass Scenario 2’s customer billing details through as e.g. a data table.
   ```
   When I Purchase the items completing Billing Details in Checkout with
   | Name      | Add1   | Add2           | PCode   |
   | Bob Jones | 123 St | Somewhereville | XX1 1XX |     
   ```
   I always think about being a manual tester handed a feature file. Do I have all the necessary test data for to complete the tests or do I need to go off and generate/source this data? The feature file should ideally be a one-stop-shop and have everything needed. Although there may be times some data is considered sensitive e.g. login data and instead set by environment variables and not committed to a source repository.
-- [ ] With more paramiterisation you could also make use of Scenario Outlines to test more test cases via varied examples e.g.
+- [x] With more paramiterisation you could also make use of Scenario Outlines to test more test cases via varied examples e.g.
   ```
   Scenario Outline: Coupon code gives appropriate discount
   Given I add "<item>" to My Cart.
@@ -54,14 +54,14 @@ Sorry this has taken some time to do… <br>
   ```
 - [x] CartPOM - More waiting (using helpers), good short CSS, no assertions (when it would have been easy for them to creep in) and just returning values. This is looking like it could turn out to be a quick review!
 - [ ] ChekoutPOM - Caught you!<br>
-   * fillOutShippingAddress() - This has hard coded test data in it. Really the method should have the address details passed to it from the test step – and it should get that data from the feature file.,br.
-   * checkChequeRadioButton() - I will sheepishly admit to just throwing  a Thread.sleep() in here and moving on with my life too. I’ve considered waiting for the spinner element that blocks the UI over the (not) radio button, then waiting for that to go away (ExpectedConditions has helper methods for waiting for things to go away), but I always end up thinking there are edge case race conditions that might not be handled.
-   * retrieveOrderNumber() - Strictly speaking that order number doesn’t show up on the checkout page – if you watch the URL you’ll see after clicking place order you are taken to a new page – and thus this should be in that new POM class.
-   * navigateToMyAccount() - Wouldn’t your test step use NavbarPOM for this?
+   *   fillOutShippingAddress() - This has hard coded test data in it. Really the method should have the address details passed to it from the test step – and it should get that data from the feature file.,br.
+   * x checkChequeRadioButton() - I will sheepishly admit to just throwing  a Thread.sleep() in here and moving on with my life too. I’ve considered waiting for the spinner element that blocks the UI over the (not) radio button, then waiting for that to go away (ExpectedConditions has helper methods for waiting for things to go away), but I always end up thinking there are edge case race conditions that might not be handled.
+   * x retrieveOrderNumber() - Strictly speaking that order number doesn’t show up on the checkout page – if you watch the URL you’ll see after clicking place order you are taken to a new page – and thus this should be in that new POM class.
+   * x navigateToMyAccount() - Wouldn’t your test step use NavbarPOM for this?
 - [x] OrdersPOM - Other than the mystery commented out code, nothing to say. Does the job following the POM design pattern.
 - [ ] utilitiesPOM/HelpersStaticPOM<br>
   Couple of useful and used) waits.<br>
-   * priceStringToBigDecimal() – nice to see an appropriate return type used for handling currency.
+  priceStringToBigDecimal() – nice to see an appropriate return type used for handling currency.<br>
    * Seeing the Double in here does make me wince for all the floating point precision inaccuracies I went in to on the course (though I have to admit I’m not sure anything could go wrong here)
    * return BigDecimal.valueOf(Double.valueOf(noCurrencyString));<br>
   To avoid you could:

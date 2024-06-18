@@ -116,11 +116,11 @@ public class ECommerceTest {
     @Then("The captured Order number matches with the one on my Orders page.")
     public void the_captured_order_number_matches_with_the_one_on_my_orders_page() {
 
-        CheckOutPOM checkout = new CheckOutPOM(driver);
+        OrderReceivedPOM orderReceived = new OrderReceivedPOM(driver);
         NavbarPOM navBar = new NavbarPOM(driver);
 
         // 9. Capture the Order Number and write it to the results
-        String orderNumber = checkout.retrieveOrderNumber();
+        String orderNumber = orderReceived.retrieveOrderNumber();
         System.out.print("the captured order number is: ");
         System.out.println(orderNumber);
 
