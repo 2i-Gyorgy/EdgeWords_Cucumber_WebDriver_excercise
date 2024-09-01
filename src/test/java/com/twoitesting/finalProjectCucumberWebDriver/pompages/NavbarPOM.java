@@ -27,8 +27,6 @@ public class NavbarPOM {
     WebElement shopLink;
     @FindBy(css = "#site-header-cart > li > a")
     WebElement cartButton;
-    @FindBy(linkText = "Orders")
-    WebElement ordersLink;
     @FindBy(linkText = "My account") WebElement myAccountLink;
 
     // Methods
@@ -39,13 +37,10 @@ public class NavbarPOM {
     public void goToShop() {
         shopLink.click();
     }
+
     public void goToCart() {
         waitForElementToBeClickablePOM(driver, cartButton, 1);
         cartButton.click();
-    }
-
-    public void navigateToOrders() {
-        ordersLink.click();
     }
 
     public void navigateToMyAccount()  {

@@ -118,6 +118,7 @@ public class ECommerceTest {
 
         OrderReceivedPOM orderReceived = new OrderReceivedPOM(driver);
         NavbarPOM navBar = new NavbarPOM(driver);
+        MyAccountPOM myAccount = new MyAccountPOM(driver);
 
         // 9. Capture the Order Number and write it to the results
         String orderNumber = orderReceived.retrieveOrderNumber();
@@ -128,8 +129,8 @@ public class ECommerceTest {
         navBar.navigateToMyAccount();
         System.out.println("Go to My Account");
 
-        navBar.navigateToOrders();
-        System.out.println("Go to Orders page");
+        myAccount.clickOrders();
+        System.out.println("Go to Cart");
 
         OrdersPOM orders = new OrdersPOM(driver);
 

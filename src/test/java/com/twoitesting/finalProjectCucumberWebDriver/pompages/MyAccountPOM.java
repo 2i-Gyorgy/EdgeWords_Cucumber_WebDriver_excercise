@@ -22,19 +22,25 @@ public class MyAccountPOM {
     @FindBy(id = "password")
     WebElement passwordField;
     @FindBy(css = "button[value='Log in']")
-    WebElement loginLink;
+    WebElement logInLink;
     @FindBy(linkText = "Logout")
     WebElement logOutLink;
+    @FindBy(linkText = "Orders")
+    WebElement ordersLink;
 
     // Methods
 
     public void doLogIn(String username, String password) {
         usernameField.sendKeys(username);
         passwordField.sendKeys(password);
-        loginLink.click();
+        logInLink.click();
     }
 
     public void doLogOut() {
         logOutLink.click();
+    }
+
+    public void clickOrders() {
+        ordersLink.click();
     }
 }
