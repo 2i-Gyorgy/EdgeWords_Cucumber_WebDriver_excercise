@@ -4,14 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.twoitesting.finalProjectCucumberWebDriver.utilitiesPOM.HelpersStaticPOM.*;
 
 public class NavbarPOM {
     // Field to work with webdriver in this class
     protected WebDriver driver;
-    protected WebDriverWait wait;
 
     // Constructor to receive driver form test and set field
     public NavbarPOM(WebDriver driver) {
@@ -23,10 +21,12 @@ public class NavbarPOM {
     // locators
     @FindBy(linkText = "Dismiss")
     WebElement dismissLink;  // button to dismiss blue information banner at the bottom
+    @FindBy(id = "site-navigation-menu-toggle")
+    WebElement menuButton;
     @FindBy(linkText = "Shop")
     WebElement shopLink;
-    @FindBy(css = "#site-header-cart > li > a")
-    WebElement cartButton;
+    @FindBy(linkText = "Cart")
+    WebElement cartLink;
     @FindBy(linkText = "My account") WebElement myAccountLink;
 
     // Methods
@@ -35,16 +35,31 @@ public class NavbarPOM {
     }
 
     public void goToShop() {
-        shopLink.click();
+        try {
+            shopLink.click();
+        } catch (Exception e) {
+            menuButton.click();
+            shopLink.click();
+        }
     }
 
     public void goToCart() {
-        waitForElementToBeClickablePOM(driver, cartButton, 1);
-        cartButton.click();
+        waitForElementToBeClickablePOM(driver, cartLink, 1);
+        try {
+            cartLink.click();
+        } catch (Exception e) {
+            menuButton.click();
+            cartLink.click();
+        }
     }
 
     public void navigateToMyAccount()  {
-        myAccountLink.click();
+        try {
+            myAccountLink.click();
+        } catch (Exception e) {
+            menuButton.click();
+            myAccountLink.click();
+        }
     }
 }
 
