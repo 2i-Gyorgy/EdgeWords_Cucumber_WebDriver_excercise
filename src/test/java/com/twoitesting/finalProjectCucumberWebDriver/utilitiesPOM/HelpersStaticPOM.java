@@ -1,5 +1,6 @@
 package com.twoitesting.finalProjectCucumberWebDriver.utilitiesPOM;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,6 +16,7 @@ public class HelpersStaticPOM {
     public String baseURL = "https://www.edgewordstraining.co.uk/demo-site/";
 
     // Helper methods
+
     public static void waitForElementToBeClickablePOM(WebDriver driver, WebElement locator, int timeOutSeconds) {
         WebDriverWait myClickWait = new WebDriverWait(driver, Duration.ofSeconds(timeOutSeconds));
         myClickWait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -23,6 +25,15 @@ public class HelpersStaticPOM {
     public static void waitForElementToBePresentPOM(WebDriver driver, WebElement locator, int timeOutSeconds) {
         WebDriverWait myPresenceWait = new WebDriverWait(driver, Duration.ofSeconds(timeOutSeconds));
         myPresenceWait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void implicitlyWait (WebDriver driver, int time) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(time));
+    }
+
+    public static void scrollElementIntoView(WebDriver driver, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     public static BigDecimal priceStringToBigDecimal(String priceValueString) { // takes in a string, looks for a pattern of \d+.\d+ - the number part of a price -, strips the currency and returns the value converted to BigDecimal

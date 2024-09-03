@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static com.twoitesting.finalProjectCucumberWebDriver.utilitiesPOM.HelpersStaticPOM.implicitlyWait;
+import static com.twoitesting.finalProjectCucumberWebDriver.utilitiesPOM.HelpersStaticPOM.scrollElementIntoView;
+
 public class MyAccountPOM {
     // Field to work with webdriver in this class
     private WebDriver driver;
@@ -21,8 +24,8 @@ public class MyAccountPOM {
     WebElement usernameField;
     @FindBy(id = "password")
     WebElement passwordField;
-    @FindBy(css = "button[value='Log in']")
-    WebElement logInLink;
+    @FindBy(className = "woocommerce-form-login__submit")
+    WebElement logInButton;
     @FindBy(linkText = "Logout")
     WebElement logOutLink;
     @FindBy(linkText = "Orders")
@@ -33,7 +36,10 @@ public class MyAccountPOM {
     public void doLogIn(String username, String password) {
         usernameField.sendKeys(username);
         passwordField.sendKeys(password);
-        logInLink.click();
+        scrollElementIntoView(driver, logInButton);
+        implicitlyWait(driver, 1);
+        logInButton.click();
+//        implicitlyWait(driver, 5);
     }
 
     public void doLogOut() {

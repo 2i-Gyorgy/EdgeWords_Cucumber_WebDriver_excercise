@@ -60,10 +60,12 @@ public class CheckOutPOM {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        scrollElementIntoView(driver, paymentMethodChequeRadioButton);
         paymentMethodChequeRadioButton.click();
     }
 
     public void clickPlaceOrder() {
+        scrollElementIntoView(driver, placeOrderButton);
         placeOrderButton.click();
     }
 
