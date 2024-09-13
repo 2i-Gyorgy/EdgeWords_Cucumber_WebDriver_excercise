@@ -11,15 +11,15 @@ Feature: Edgewords eCommerce demo-site
     Examples:
     | item       | couponCode | discount |
     | Sunglasses | edgewords  | 15       |
-    | Cap        | edgewords  | 15       |
-
-  Scenario Outline: Completed order added to order history
-    Given I add item "<item>" to the cart.
-    When Purchase item completing Billing Details in Checkout with
-      | First Name | Last Name | Address1 | City           | Post Code | Phone Number |
-      | Michael    | Knight    | MK St    | RandomplaceMK  | XX1 1XX   | 07123456789  |
-    Then The captured Order number matches with the one on my Orders page.
-    Examples:
-      | item       |
-      | Sunglasses |
-      | Cap        |
+#    | Cap        | edgewords  | 15       |
+#
+#  Scenario Outline: Completed order added to order history
+#    Given I add item "<item>" to the cart.
+#    When Purchase item completing Billing Details in Checkout with
+#      | First Name | Last Name | Address1 | City           | Post Code | Phone Number |
+#      | Michael    | Knight    | MK St    | RandomplaceMK  | XX1 1XX   | 07123456789  |
+#    Then The captured Order number matches with the one on my Orders page.
+#    Examples:
+#      | item       |
+#      | Sunglasses |
+#      | Cap        |

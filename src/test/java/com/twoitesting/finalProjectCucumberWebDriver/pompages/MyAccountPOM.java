@@ -24,7 +24,7 @@ public class MyAccountPOM {
     WebElement usernameField;
     @FindBy(id = "password")
     WebElement passwordField;
-    @FindBy(className = "woocommerce-form-login__submit")
+    @FindBy(xpath = "//*[@id=\"customer_login\"]/div[1]/form/p[3]/button")
     WebElement logInButton;
     @FindBy(linkText = "Logout")
     WebElement logOutLink;
@@ -37,9 +37,7 @@ public class MyAccountPOM {
         usernameField.sendKeys(username);
         passwordField.sendKeys(password);
         scrollElementIntoView(driver, logInButton);
-        implicitlyWait(driver, 1);
         logInButton.click();
-//        implicitlyWait(driver, 5);
     }
 
     public void doLogOut() {
